@@ -22,7 +22,17 @@ class StoreFrendRequestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'sender' => ["required"],
+            "receiver" => ["required"],
+            "accepted" => ["required"]
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->sender,
+            "receiver_user_id" => $this->receiver
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class FrendRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "user_id" => User::factory(),
+            "receiver_user_id" => User::factory(),
+            "accepted" => fake()->boolean(60)
         ];
     }
 }

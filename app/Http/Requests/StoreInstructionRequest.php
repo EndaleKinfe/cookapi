@@ -22,7 +22,15 @@ class StoreInstructionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "instruction" => ["required"],
+            "postId" => ["required"]
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "post_id" => $this->postId,
+        ]);
     }
 }

@@ -29,7 +29,7 @@ class LikePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return !$user->is_admin;
     }
 
     /**
@@ -45,7 +45,7 @@ class LikePolicy
      */
     public function delete(User $user, Like $like): bool
     {
-        return false;
+        return $user->id == $like->user_id ;
     }
 
     /**

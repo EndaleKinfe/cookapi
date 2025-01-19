@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            "receiver_user_id" => User::factory(),
+            "message" => fake()->text(),
+            "message_seen" => fake()->boolean(70),
+            "message_seen_at" =>fake()->dateTimeThisYear()
         ];
     }
 }

@@ -22,7 +22,21 @@ class StoreLikeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "userId" => ["required"],
+            "likableId" => ["required"],
+            "likableType" => ["required"],
+
         ];
     }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "user_id" => $this->userId,
+            "likable_type" => $this->likableType,
+            "likable_id" => $this->likableId,
+
+        ]);
+    }
 }
+

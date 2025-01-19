@@ -21,7 +21,7 @@ class ReportPolicy
      */
     public function view(User $user, Report $report): bool
     {
-        return false;
+        return $user->is_admin == true;
     }
 
     /**

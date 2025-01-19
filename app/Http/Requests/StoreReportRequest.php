@@ -22,7 +22,19 @@ class StoreReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "userId" => ["required"],
+            "postId" => ["required"],
+            "violation" => ["required"],
         ];
     }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "user_id" => $this->userId,
+            "post_id" => $this->postId
+        ]);
+    }
+
+
 }

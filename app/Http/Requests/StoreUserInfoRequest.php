@@ -22,7 +22,24 @@ class StoreUserInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "userId" =>["required"],
+            "firstName" => ["required"],
+            "lastName" => ["required"],
+            "phoneNumber" => ["required"],
+            "birthday" => ["required"],
+            "gender" => ["required"],
+            "city" => ["required"],
+            "country"=> ["required"],
+            "bio" => ["sometimes","required"],
         ];
+    }
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "user_id" => $this->userId,
+            "first_name" => $this->firstName,
+            "last_name" => $this->lastName,
+            "phone_number" => $this->phoneNumber,
+        ]);
     }
 }

@@ -22,7 +22,18 @@ class StoreIngredientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "postId" => ["required"],
+            "ingredient" => ["required"],
+            "description" => ["required"],
+            "amount" => ["required"]
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "post_id" => $this->postId,
+
+        ]);
     }
 }

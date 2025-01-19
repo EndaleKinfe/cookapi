@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string("gender");
             $table->string("city");
             $table->string("country");
-            $table->text("bio");
-            $table->string("profile_pic_location");
+            $table->text("bio")->nullable();
             $table->timestamps();
         });
     }

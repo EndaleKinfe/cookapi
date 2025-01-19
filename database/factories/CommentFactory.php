@@ -2,6 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Video;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +21,18 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "user_id" => User::factory(),
+            "comment" => fake()->text(),
+            "commentable_id" => fake()->randomElement([Post::factory(), Video::factory(), Comment::factory()]),
+            "commentable_type" => function (array $attributes) {
+                if (Post::find($attributes['sharable_id'])->type == "Post") {
+                    return Post::find($attributes['sharable_id'])->type;
+                } else if (Video::find($attributes['sharable_id'])->type == "Video") {
+                    Video::find($attributes['sharable_id'])->type;
+                } else {
+                    Comment::find($attributes['sharable_id'])->type;
+                }
+            }
         ];
     }
 }

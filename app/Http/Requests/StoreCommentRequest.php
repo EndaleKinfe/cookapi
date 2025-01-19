@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCommentRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,18 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "comment" => ["required"],
+            "commenter" => ["required"],
+            "commentableId" => ["required"],
+            "commenableType" => ["required", Rule::in("App\Models\Post", "App\Models\Comment", "App\Models\Video")]
         ];
+    }
+
+    public function prepareForValidation(){
+        $this->merge([
+            'user_id' => $this->commenter,
+            "commentable_id" => $this->commentableId,
+            "commentable_type" => $this->commenableType
+        ]);
     }
 }

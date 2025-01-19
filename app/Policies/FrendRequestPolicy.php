@@ -37,7 +37,7 @@ class FrendRequestPolicy
      */
     public function update(User $user, FrendRequest $frendRequest): bool
     {
-        return false;
+        return $user->id == $frendRequest->user_id || $user->id == $frendRequest->receiver_user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class FrendRequestPolicy
      */
     public function delete(User $user, FrendRequest $frendRequest): bool
     {
-        return false;
+        return $user->id == $frendRequest->user_id || $user->id == $frendRequest->receiver_user_id;
     }
 
     /**

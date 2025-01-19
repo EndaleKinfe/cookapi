@@ -22,7 +22,18 @@ class StoreVideoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "videoUrl" => $this->video_url,
+            "videoDescription" => $this->description,
+            "userId" => $this->user_id
         ];
+    }
+
+    public function prepareForValidation(){
+        $this->merge([
+            "user_id" => $this->userId,
+            "video_url" => $this->videoUrl,
+            "video_description" => $this->videoDescription,
+
+        ]);
     }
 }

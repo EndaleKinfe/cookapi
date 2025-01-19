@@ -22,7 +22,16 @@ class StoreFollowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'follower' => ["required"],
+            "followed" => ["required"]
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->follower,
+            "receiver_user_id" => $this->followe
+        ]);
     }
 }

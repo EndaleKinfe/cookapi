@@ -22,7 +22,19 @@ class StoreImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "imageUrl" => ["required"],
+            "imagableId" => ["required"],
+            "imagableType" => ["required"],
+
         ];
+    }
+
+    public function prepareForValidation(){
+        return $this->merge([
+            "imagable_id" => $this->imagableId,
+            "imagable_type" => $this->imagableType,
+            "imagable_url" => $this->imagableUrl,
+
+        ]);
     }
 }

@@ -37,7 +37,7 @@ class IngredientPolicy
      */
     public function update(User $user, Ingredient $ingredient): bool
     {
-        return false;
+        return $user->id == $ingredient->post->user_id;
     }
 
     /**

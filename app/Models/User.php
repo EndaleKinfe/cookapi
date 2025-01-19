@@ -26,6 +26,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        "is_creator",
+        "is_admin"
     ];
 
     /**
@@ -110,6 +112,11 @@ class User extends Authenticatable
     public function image(): MorphOne
     {
         return $this->morphOne(Image::class, "");
+    }
+
+    public function user_info(): HasOne
+    {
+        return $this->hasOne(UserInfo::class);
     }
 
 }

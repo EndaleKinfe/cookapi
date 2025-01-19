@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('interests', function (Blueprint $table) {
             $table->id();
             $table->string("interest", 100);
-            $table->integer("user_id");
             $table->timestamps();
         });
 

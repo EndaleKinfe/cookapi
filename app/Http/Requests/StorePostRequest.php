@@ -22,7 +22,15 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "userId" => $this->user_id,
+            "title" => $this->title,
+            "description" => $this->description
         ];
+    }
+
+    public function prepareForValidation(){
+        return $this->merge([
+            "user_id" => $this->userId,
+        ]);
     }
 }

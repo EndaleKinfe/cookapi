@@ -37,7 +37,7 @@ class InstructionPolicy
      */
     public function update(User $user, Instruction $instruction): bool
     {
-        return false;
+        return $user->id == $instruction->post->user_id;
     }
 
     /**

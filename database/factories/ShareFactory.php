@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Video;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,16 @@ class ShareFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "user_id" => User::factory(),
+            "sharable_id" => fake()->randomElement([Post::factory(), Video::factory()]),
+            "sharable_type" => function (array $attributes) {
+                if(Post::find($attributes['sharable_id'])->type == "Post"){
+                    return Post::find($attributes['sharable_id'])->type;
+                }
+                else{
+                    Video::find($attributes['sharable_id']);
+                }
+            }
         ];
     }
 }

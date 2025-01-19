@@ -45,7 +45,7 @@ class FollowPolicy
      */
     public function delete(User $user, Follow $follow): bool
     {
-        return false;
+        return $user->id == $follow->user_id;
     }
 
     /**
