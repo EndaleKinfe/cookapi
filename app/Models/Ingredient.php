@@ -10,6 +10,14 @@ class Ingredient extends Model
 {
     /** @use HasFactory<\Database\Factories\IngredientFactory> */
     use HasFactory;
+
+    public $fillable = [
+        "post_id",
+        "ingredient",
+        "description",
+        "amount"
+    ];
+
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);

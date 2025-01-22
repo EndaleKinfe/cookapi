@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
                 Instruction::factory()->count(5)
             )->has(
                 Image::factory()->count(2)
+            )->has(
+                Like::factory()->count(2)
             )
 
 
@@ -47,6 +49,8 @@ class DatabaseSeeder extends Seeder
                 Comment::factory()->count(2)->has(
                     Like::factory()->count(2)
                 )
+            )->has(
+                Like::factory()->count(2)
             )
         )->create();
 

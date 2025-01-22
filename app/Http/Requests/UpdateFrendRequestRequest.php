@@ -11,7 +11,7 @@ class UpdateFrendRequestRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,28 @@ class UpdateFrendRequestRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                'sender' => ["required"],
+                "receiver" => ["required"],
+                "accepted" => ["required"]
+            ];
+        } else {
+            return [
+                'sender' => ["sometimes", "required"],
+                "receiver" => ["sometimes", "required"],
+                "accepted" => ["sometimes", "required"]
+            ];
+        }
+
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->sender,
+            "receiver_user_id" => $this->receiver
+        ]);
     }
 }

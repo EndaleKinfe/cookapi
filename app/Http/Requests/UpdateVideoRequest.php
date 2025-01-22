@@ -11,7 +11,7 @@ class UpdateVideoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,19 @@ class UpdateVideoRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                "video_url" => ["required"],
+                "description" => ["required"],
+            ];
+        } else {
+            return [
+                "video_url" => ["sometimes","required"],
+                "video_description" => ["sometimes","required"],
+            
+            ];
+        }
     }
+
 }

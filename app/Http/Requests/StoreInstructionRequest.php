@@ -11,7 +11,7 @@ class StoreInstructionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,14 +23,8 @@ class StoreInstructionRequest extends FormRequest
     {
         return [
             "instruction" => ["required"],
-            "postId" => ["required"]
+            "post_id" => ["required"]
         ];
     }
 
-    public function prepareForValidation()
-    {
-        return $this->merge([
-            "post_id" => $this->postId,
-        ]);
-    }
 }

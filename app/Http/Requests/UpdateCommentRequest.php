@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCommentRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,31 @@ class UpdateCommentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+            "comment" => ["required", "string"],
+            "commenter" => ["required"],
+            "commentableId" => ["required"],
+            "commenableType" => ["required", Rule::in("App\Models\Post", "App\Models\Comment", "App\Models\Video")]
         ];
+        } else {
+            return [
+                "comment" => ["required","sometimes", "string"],
+                "commenter" => ["required", "sometimes"],
+                "commentableId" => ["required", "sometimes"],
+                "commenableType" => ["required", Rule::in("App\Models\Post", "App\Models\Comment", "App\Models\Video", "sometimes")]
+            ];
+        }
+        
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->commenter,
+            "commentable_id" => $this->commentableId,
+            "commentable_type" => $this->commenableType
+        ]);
     }
 }

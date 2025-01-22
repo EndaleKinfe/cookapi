@@ -27,10 +27,10 @@ class LikeFactory extends Factory
                 if (Post::find($attributes['sharable_id'])->type == "Post") {
                     return Post::find($attributes['sharable_id'])->type;
                 } else if(Video::find($attributes['sharable_id'])->type == "Video") {
-                    Video::find($attributes['sharable_id'])->type;
+                    return Video::find($attributes['sharable_id'])->type;
                 }
                 else{
-                    Comment::find($attributes['sharable_id'])->type;
+                    return Comment::find($attributes['sharable_id'])->type;
                 }
             }
         ];

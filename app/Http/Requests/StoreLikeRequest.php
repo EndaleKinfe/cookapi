@@ -11,7 +11,7 @@ class StoreLikeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,21 +22,12 @@ class StoreLikeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "userId" => ["required"],
-            "likableId" => ["required"],
-            "likableType" => ["required"],
+            "user_id" => ["required"],
+            "likable_id" => ["required"],
+            "likable_type" => ["required"],
 
         ];
     }
 
-    public function prepareForValidation()
-    {
-        return $this->merge([
-            "user_id" => $this->userId,
-            "likable_type" => $this->likableType,
-            "likable_id" => $this->likableId,
-
-        ]);
-    }
 }
 

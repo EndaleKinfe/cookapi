@@ -11,7 +11,7 @@ class StoreMessageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,20 +22,11 @@ class StoreMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "senderId" =>  ["required"],
-            "receiverId" =>  ["required"],
+            "user_id" =>  ["required"],
+            "receiver_user_id" =>  ["required"],
             "message" => ["required"],
-            "messageSeen" =>  ["required"],
         ];
     }
 
-    public function prepareForValidation()
-    {
-        return $this->merge([
-            "user_id" => $this->senderId,
-            "receiver_user_id" => $this->receiverId,
-            "message_seen" => $this->messageSeen,
-
-        ]);
-    }
+   
 }

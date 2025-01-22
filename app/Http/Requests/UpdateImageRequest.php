@@ -11,7 +11,7 @@ class UpdateImageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,29 @@ class UpdateImageRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                "imageUrl" => ["required"],
+                "imagableId" => ["required"],
+                "imagableType" => ["required"],
+            ];
+        } else {
+            return [
+                "imageUrl" => ["sometimes", "required"],
+                "imagableId" => ["sometimes", "required"],
+                "imagableType" => ["sometimes", "required"],
+            ];
+        }
+    }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "imagable_id" => $this->imagableId,
+            "imagable_type" => $this->imagableType,
+            "imagable_url" => $this->imagableUrl,
+
+        ]);
     }
 }

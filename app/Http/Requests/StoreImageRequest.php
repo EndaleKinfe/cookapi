@@ -11,7 +11,7 @@ class StoreImageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,19 +22,10 @@ class StoreImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "imageUrl" => ["required"],
-            "imagableId" => ["required"],
-            "imagableType" => ["required"],
+            "image_url" => ["required"],
+            "imagable_id" => ["required"],
+            "imagable_type" => ["required"],
 
         ];
-    }
-
-    public function prepareForValidation(){
-        return $this->merge([
-            "imagable_id" => $this->imagableId,
-            "imagable_type" => $this->imagableType,
-            "imagable_url" => $this->imagableUrl,
-
-        ]);
     }
 }

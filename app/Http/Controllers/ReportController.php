@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use App\Http\Requests\StoreReportRequest;
 use App\Http\Requests\UpdateReportRequest;
+use App\Http\Resources\ReportResource;
 
 class ReportController extends Controller
 {
@@ -13,15 +14,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return ReportResource::collection(Report::all());
     }
 
     /**
@@ -29,23 +22,8 @@ class ReportController extends Controller
      */
     public function store(StoreReportRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Report $report)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Report $report)
-    {
-        //
+        Report::create($request->validated());
+        return response("created", 201);
     }
 
     /**
@@ -53,7 +31,8 @@ class ReportController extends Controller
      */
     public function update(UpdateReportRequest $request, Report $report)
     {
-        //
+        $report($request->validated());
+        return response("updated", 201);
     }
 
     /**
@@ -61,6 +40,7 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        $report->delete();
+        return response("image deleted", 200);
     }
 }

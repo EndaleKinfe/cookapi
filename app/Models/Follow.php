@@ -10,6 +10,11 @@ class Follow extends Model
 {
     /** @use HasFactory<\Database\Factories\FollowFactory> */
     use HasFactory;
+    public $fillable = [
+        "user_id",
+        "receiver_user_id"
+    ];
+    
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

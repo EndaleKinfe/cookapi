@@ -11,7 +11,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,19 @@ class UpdatePostRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                "user_id" => ["required"],
+                "title" => ["required"],
+                "description" => ["required"]
+            ];
+        } else {
+            return [
+                "user_id" => ["sometimes", "required"],
+                "title" => ["sometimes", "required"],
+                "description" => ["sometimes", "required"]
+            ];
+        }
     }
 }

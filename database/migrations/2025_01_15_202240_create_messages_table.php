@@ -16,8 +16,8 @@ return new class extends Migration
             $table->integer("user_id");
             $table->integer("receiver_user_id");
             $table->text("message");
-            $table->boolean("message_seen");
-            $table->dateTime("message_seen_at");
+            $table->boolean("message_seen")->nullable();
+            $table->dateTime("message_seen_at")->nullable();
             $table->timestamps();
         });
     }

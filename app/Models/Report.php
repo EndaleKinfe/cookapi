@@ -10,6 +10,13 @@ class Report extends Model
 {
     /** @use HasFactory<\Database\Factories\ReportFactory> */
     use HasFactory;
+
+    public $fillable = [
+        "user_id",
+        "post_id",
+        "violation"
+    ];
+
     public function user():BelongsTo
     {
         return $this->belongsTo(User::class);

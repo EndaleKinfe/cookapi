@@ -11,7 +11,7 @@ class UpdateFollowRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,25 @@ class UpdateFollowRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                'follower' => ["required"],
+                "followed" => ["required"]
+            ];
+        } else {
+            return [
+                'follower' => ["sometimes", "required"],
+                "followed" => ["sometimes", "required"]
+            ];
+        }
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->follower,
+            "receiver_user_id" => $this->followe
+        ]);
     }
 }

@@ -56,6 +56,11 @@ class User extends Authenticatable
     public function posts():HasMany{
         return $this->hasMany(Post::class)->chaperone();
     }
+
+    public function videos(): HasMany
+    {
+        return $this->hasMany(Video::class)->chaperone();
+    }
     public function messages():HasMany 
     {
         return $this->hasMany(Message::class)->chaperone();
@@ -111,7 +116,7 @@ class User extends Authenticatable
 
     public function image(): MorphOne
     {
-        return $this->morphOne(Image::class, "");
+        return $this->morphOne(Image::class, "imagable");
     }
 
     public function user_info(): HasOne

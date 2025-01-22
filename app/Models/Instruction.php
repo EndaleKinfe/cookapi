@@ -10,6 +10,10 @@ class Instruction extends Model
 {
     /** @use HasFactory<\Database\Factories\InstructionFactory> */
     use HasFactory;
+    public $fillable = [
+        "post_id",
+        "instruction"
+    ];
     public function post():BelongsTo
     {
         return $this->belongsTo(Post::class);

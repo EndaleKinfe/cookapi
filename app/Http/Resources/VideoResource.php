@@ -18,6 +18,7 @@ class VideoResource extends JsonResource
             "id" => $this->id,
             "videoUrl" => $this->video_url,
             "videoDescription" => $this->description,
+            "comments" => !is_null(CommentResource::collection($this->whenLoaded("comments"))) ? CommentResource::collection($this->whenLoaded("comments")) : "null",
             "userId" => $this->user_id
         ];
     }

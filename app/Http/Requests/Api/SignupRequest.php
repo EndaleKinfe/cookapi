@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Password;
 
-class StoreIngredientRequest extends FormRequest
+class SignupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +23,9 @@ class StoreIngredientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "post_id" => ["required"],
-            "ingredient" => ["required"],
-            "description" => ["required"],
-            "amount" => ["required"]
+            "name" => ["required", "string", "max:70", "unique:users,name"],
+            "email" => ["required", "email", "max:70", "unique:users,email"],
+            "password" => ["required"]
         ];
     }
-
-
 }

@@ -11,7 +11,7 @@ class UpdateUserInfoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,26 @@ class UpdateUserInfoRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                "postId" => ["required"],
+                "violation" => ["required"],
+            ];
+        } else {
+            return [
+                
+                "postId" => ["sometimes", "required"],
+                "violation" => ["sometimes", "required"],
+            ];
+        }
+    }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "user_id" => $this->userId,
+            "post_id" => $this->postId
+        ]);
     }
 }

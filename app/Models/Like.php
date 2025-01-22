@@ -13,6 +13,12 @@ class Like extends Model
     /** @use HasFactory<\Database\Factories\LikeFactory> */
     use HasFactory;
 
+    public $fillable = [
+        "user_id",
+        "likable_id",
+        "likable_type"
+    ];
+
     public function likable(): MorphTo
     {
         return $this->morphTo();

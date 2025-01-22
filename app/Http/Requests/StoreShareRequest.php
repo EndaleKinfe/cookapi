@@ -11,7 +11,7 @@ class StoreShareRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,20 +22,12 @@ class StoreShareRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "userId" => ["required"],
-            "sharableId" => ["required"],
-            "sharableType" => ["required"],
+            "user_id" => ["required"],
+            "sharable_id" => ["required"],
+            "sharable_type" => ["required"],
 
         ];
     }
 
-    public function prepareForValidation()
-    {
-        return $this->merge([
-            "user_id" => $this->userId,
-            "sharable_type" => $this->sharableType,
-            "sharable_id" => $this->sharableId,
-
-        ]);
-    }
+   
 }

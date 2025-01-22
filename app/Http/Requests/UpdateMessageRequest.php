@@ -11,7 +11,7 @@ class UpdateMessageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,30 @@ class UpdateMessageRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                "senderId" =>  ["required"],
+                "receiverId" =>  ["required"],
+                "message" => ["required"],
+                "messageSeen" =>  ["required"],
+            ];
+        } else {
+            return [
+                "senderId" =>  ["sometimes", "required"],
+                "receiverId" =>  ["sometimes", "required"],
+                "message" => ["sometimes", "required"],
+                "messageSeen" =>  ["sometimes", "required"],
+            ];
+        }
+    }
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "user_id" => $this->senderId,
+            "receiver_user_id" => $this->receiverId,
+            "message_seen" => $this->messageSeen,
+
+        ]);
     }
 }

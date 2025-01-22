@@ -16,44 +16,24 @@ class InstructionController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreInstructionRequest $request)
     {
-        //
+        Instruction::create($request->validated());
+        return response("created", 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Instruction $instruction)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Instruction $instruction)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateInstructionRequest $request, Instruction $instruction)
     {
-        //
+        $instruction($request->validated());
+        return response("updated", 201);
     }
 
     /**
@@ -61,6 +41,7 @@ class InstructionController extends Controller
      */
     public function destroy(Instruction $instruction)
     {
-        //
+        $instruction->delete();
+        return response("image deleted", 200);
     }
 }

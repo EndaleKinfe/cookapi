@@ -22,11 +22,11 @@ class ImageFactory extends Factory
             "image_url" => fake()->imageUrl(),
             "imagable_id" => fake()->randomElement([Post::factory(), User::factory()]),
             "imagable_type" => function (array $attributes) {
-                if (Post::find($attributes['sharable_id'])->type == "Post") {
-                    return Post::find($attributes['sharable_id'])->type;
+                if (Post::find($attributes['imagable_id'])->type == "Post") {
+                    return Post::find($attributes['imagable_id'])->type;
                
                 } else {
-                    User::find($attributes['sharable_id'])->type;
+                    return User::find($attributes['imagable_id'])->type;
                 }
             }
         ];

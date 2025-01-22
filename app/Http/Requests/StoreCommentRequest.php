@@ -23,18 +23,10 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "comment" => ["required"],
-            "commenter" => ["required"],
-            "commentableId" => ["required"],
-            "commenableType" => ["required", Rule::in("App\Models\Post", "App\Models\Comment", "App\Models\Video")]
+            "comment" => ["required", "string"],
+            "user_id" => ["required"],
+            "commentable_id" => ["required"],
+            "commentable_type" => ["required", Rule::in("App\\Models\\Post", "App\\Models\\Comment", "App\\Models\\Video")]
         ];
-    }
-
-    public function prepareForValidation(){
-        $this->merge([
-            'user_id' => $this->commenter,
-            "commentable_id" => $this->commentableId,
-            "commentable_type" => $this->commenableType
-        ]);
     }
 }

@@ -11,6 +11,12 @@ class Comment extends Model
 {
     /** @use HasFactory<\Database\Factories\CommentFactory> */
     use HasFactory;
+    public $fillable = [
+        "comment",
+        "user_id",
+        "commentable_id",
+        "commentable_type"
+    ];
 
     public function commentable():MorphTo
     {

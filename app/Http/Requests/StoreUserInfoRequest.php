@@ -11,7 +11,7 @@ class StoreUserInfoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,10 +22,10 @@ class StoreUserInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "userId" =>["required"],
-            "firstName" => ["required"],
-            "lastName" => ["required"],
-            "phoneNumber" => ["required"],
+            "user_id" =>["required"],
+            "first_name" => ["required"],
+            "last_name" => ["required"],
+            "phone_number" => ["required"],
             "birthday" => ["required"],
             "gender" => ["required"],
             "city" => ["required"],
@@ -33,13 +33,5 @@ class StoreUserInfoRequest extends FormRequest
             "bio" => ["sometimes","required"],
         ];
     }
-    public function prepareForValidation()
-    {
-        return $this->merge([
-            "user_id" => $this->userId,
-            "first_name" => $this->firstName,
-            "last_name" => $this->lastName,
-            "phone_number" => $this->phoneNumber,
-        ]);
-    }
+  
 }

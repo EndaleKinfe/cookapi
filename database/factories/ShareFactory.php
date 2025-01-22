@@ -27,7 +27,7 @@ class ShareFactory extends Factory
                     return Post::find($attributes['sharable_id'])->type;
                 }
                 else{
-                    Video::find($attributes['sharable_id']);
+                   return Video::find($attributes['sharable_id']);
                 }
             }
         ];

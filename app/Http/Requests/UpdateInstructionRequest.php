@@ -11,7 +11,7 @@ class UpdateInstructionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,24 @@ class UpdateInstructionRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                "instruction" => ["required"],
+                "postId" => ["required"]
+            ];
+        } else {
+            return [
+                "instruction" => ["sometimes", "required"],
+                "postId" => ["sometimes", "required"]
+            ];
+        }
+    }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "post_id" => $this->postId,
+        ]);
     }
 }

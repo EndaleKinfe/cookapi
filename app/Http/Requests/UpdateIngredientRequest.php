@@ -11,7 +11,7 @@ class UpdateIngredientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,29 @@ class UpdateIngredientRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                "postId" => ["required"],
+                "ingredient" => ["required"],
+                "description" => ["required"],
+                "amount" => ["required"]
+            ];
+        } else {
+            return [
+                "postId" => ["sometimes", "required"],
+                "ingredient" => ["sometimes", "required"],
+                "description" => ["sometimes", "required"],
+                "amount" => ["sometimes", "required"]
+            ];
+        }
+    }
+
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "post_id" => $this->postId,
+
+        ]);
     }
 }

@@ -11,7 +11,7 @@ class UpdateReportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,27 @@ class UpdateReportRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == "PUT") {
+            return [
+                "userId" => ["required"],
+                "postId" => ["required"],
+                "violation" => ["required"],
+            ];
+        } else {
+            return [
+                "userId" => ["sometimes", "required"],
+                "postId" => ["sometimes", "required"],
+                "violation" => ["sometimes", "required"],
+            ];
+        }
+    }
+    
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            "user_id" => $this->userId,
+            "post_id" => $this->postId
+        ]);
     }
 }

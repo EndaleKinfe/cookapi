@@ -11,6 +11,12 @@ class FrendRequest extends Model
     /** @use HasFactory<\Database\Factories\FrendRequestFactory> */
     use HasFactory;
 
+    public $fillable = [
+        "user_id",
+        "receiver_user_id",
+        "accept"
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

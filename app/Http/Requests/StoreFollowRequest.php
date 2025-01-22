@@ -11,7 +11,7 @@ class StoreFollowRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,16 +22,9 @@ class StoreFollowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'follower' => ["required"],
-            "followed" => ["required"]
+            'user_id' => ["required"],
+            "receiver_user_id" => ["required"]
         ];
     }
 
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'user_id' => $this->follower,
-            "receiver_user_id" => $this->followe
-        ]);
-    }
 }

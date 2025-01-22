@@ -12,6 +12,12 @@ class Share extends Model
     /** @use HasFactory<\Database\Factories\ShareFactory> */
     use HasFactory;
 
+    public $fillable = [
+        "user_id",
+        "sharable_id",
+        "sharable_type"
+    ];
+
     public function sharable():MorphTo
     {
         return $this->morphTo();

@@ -11,7 +11,7 @@ class StoreVideoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,18 +22,10 @@ class StoreVideoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "videoUrl" => $this->video_url,
-            "videoDescription" => $this->description,
-            "userId" => $this->user_id
+            "video_url" => ["required"],
+            "description" => ["required"],
+            "user_id" => ["required"]
         ];
     }
 
-    public function prepareForValidation(){
-        $this->merge([
-            "user_id" => $this->userId,
-            "video_url" => $this->videoUrl,
-            "video_description" => $this->videoDescription,
-
-        ]);
-    }
 }
