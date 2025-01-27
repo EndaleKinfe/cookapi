@@ -16,6 +16,7 @@ class FrendRequest extends Model
         "receiver_user_id",
         "accept"
     ];
+    protected $with = ['user', 'receiver_user'];
 
     public function user(): BelongsTo
     {

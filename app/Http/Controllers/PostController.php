@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -20,7 +21,7 @@ class PostController extends Controller
         if ($includeDetails) {
             return new PostResource(Post::all()->paginate()->when("ingredients", "comments", "instructions"));
         }
-        return new PostCollection(Post::all());
+        return new PostCollection(Post::withcount(["likes","comments","shares"])->with("user")->get());
     }
 
 
@@ -29,12 +30,12 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        return new PostResource(Post::create($request->validated()));
+        return new PostResource(Post::create($request->all()));
     }
 
     public function show(Post $post){
     
-        return new PostResource($post->loadMissing("ingredients","comments","instructions"));
+        return new PostResource($post->loadCount(["comments", "likes", "shares"])->loadMissing("ingredients","comments","instructions"));
         
 
     }

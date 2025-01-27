@@ -26,7 +26,7 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request)
     {
-        return new VideoResource(Video::create($request->validated()));
+        return new VideoResource(Video::create($request->all()));
     }
 
 

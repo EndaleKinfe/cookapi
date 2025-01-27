@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('interests', function (Blueprint $table) {
             $table->id();
+            $table->integer("user_id");
             $table->string("interest", 100);
             $table->timestamps();
         });
 
-        Schema::create("interests_user", function(Blueprint $table){
-            $table->integer("user_id");
-            $table->integer("interest_id");
-        });
     }
 
     /**

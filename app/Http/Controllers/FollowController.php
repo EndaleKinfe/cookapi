@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Follow;
 use App\Http\Requests\StoreFollowRequest;
 use App\Http\Requests\UpdateFollowRequest;
+use Illuminate\Http\Request;
 
 class FollowController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return $request->user()->follows();
     }
 
    
@@ -22,7 +23,8 @@ class FollowController extends Controller
      */
     public function store(StoreFollowRequest $request)
     {
-        //
+        Follow::create($request->all());
+        return response("created", 201);
     }
 
    
@@ -40,6 +42,7 @@ class FollowController extends Controller
      */
     public function destroy(Follow $follow)
     {
-        //
+        $follow->delete();
+        return response('', 204);
     }
 }

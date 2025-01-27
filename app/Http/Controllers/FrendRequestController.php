@@ -24,7 +24,7 @@ class FrendRequestController extends Controller
      */
     public function store(StoreFrendRequestRequest $request)
     {
-        FrendRequest::create($request->validated());
+        FrendRequest::create($request->all());
         return response("created", 201);
     }
 

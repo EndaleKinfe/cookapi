@@ -16,8 +16,8 @@ class FrendRequestResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            'sender' => $this->user_id,
-            "receiver" => $this->receiver_user_id,
+            'sender' => $this->user,
+            "receiver" => $this->receiver_user,
             "accepted" => $this->accepted
         ];
     }

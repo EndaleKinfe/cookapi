@@ -14,6 +14,8 @@ class Follow extends Model
         "user_id",
         "receiver_user_id"
     ];
+
+    protected $with = ["user", 'followed_user'];
     
     public function user(): BelongsTo
     {

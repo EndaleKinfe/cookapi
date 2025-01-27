@@ -22,7 +22,6 @@ class StoreShareRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "user_id" => ["required"],
             "sharable_id" => ["required"],
             "sharable_type" => ["required"],
 

@@ -15,7 +15,7 @@ class LikeController extends Controller
      */
     public function store(StoreLikeRequest $request)
     {
-        Like::create($request->validated());
+        Like::create($request->all());
         return response("created", 201);
     }
 

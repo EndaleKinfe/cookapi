@@ -22,7 +22,7 @@ class ReportController extends Controller
      */
     public function store(StoreReportRequest $request)
     {
-        Report::create($request->validated());
+        Report::create($request->all());
         return response("created", 201);
     }
 

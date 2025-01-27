@@ -13,7 +13,7 @@ class ShareController extends Controller
      */
     public function store(StoreShareRequest $request)
     {
-        Share::create($request->validated());
+        Share::create($request->all());
         return response("created", 201);
     }
 

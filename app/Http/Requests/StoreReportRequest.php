@@ -22,7 +22,6 @@ class StoreReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "user_id" => ["required"],
             "post_id" => ["required"],
             "violation" => ["required"],
         ];

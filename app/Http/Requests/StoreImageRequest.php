@@ -25,7 +25,6 @@ class StoreImageRequest extends FormRequest
             "image_url" => ["required"],
             "imagable_id" => ["required"],
             "imagable_type" => ["required"],
-
         ];
     }
 }

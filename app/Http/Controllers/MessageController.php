@@ -23,7 +23,7 @@ class MessageController extends Controller
      */
     public function store(StoreMessageRequest $request)
     {
-        Message::create($request->validated());
+        Message::create($request->all());
         return response("created", 201);
     }
 

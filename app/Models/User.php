@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +30,8 @@ class User extends Authenticatable
         "is_creator",
         "is_admin"
     ];
+
+    protected $with = ["userInfo", 'image'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -109,9 +112,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Share::class);
     }
-    public function interests(): BelongsToMany
+    public function interests(): HasMany
     {
-        return $this->belongsToMany(Interest::class);
+        return $this->hasMany(Interest::class);
     }
 
     public function image(): MorphOne
@@ -119,7 +122,7 @@ class User extends Authenticatable
         return $this->morphOne(Image::class, "imagable");
     }
 
-    public function user_info(): HasOne
+    public function userInfo(): HasOne
     {
         return $this->hasOne(UserInfo::class);
     }

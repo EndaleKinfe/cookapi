@@ -23,8 +23,7 @@ class StoreVideoRequest extends FormRequest
     {
         return [
             "video_url" => ["required"],
-            "description" => ["required"],
-            "user_id" => ["required"]
+            "description" => ["required"]
         ];
     }
 

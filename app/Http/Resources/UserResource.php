@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,7 +18,8 @@ class UserResource extends JsonResource
         return [
             "id" => $this->id,
             "email" => $this->email,
-            "username" => $this->name
+            "username" => $this->name,
+            "info" => !is_null(UserInfo::collection($this->whenLoaded("userinfo"))) ? UserInfo::collection($this->whenLoaded("userinfo")) : null,
         ];
     }
 }

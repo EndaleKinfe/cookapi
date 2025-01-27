@@ -22,7 +22,7 @@ class StoreInterestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "interest" => ["required"]
         ];
     }
 }

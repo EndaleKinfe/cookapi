@@ -23,11 +23,11 @@ class AuthController extends Controller
             ]
             );
 
-    //    $token =  $user->createToken("user")->planeTextToken;
+       $token =  $user->createToken("user");
        return response(
         [
             "user" => $user,
-            // "token" => $token
+            "token" => $token->plainTextToken
         ]);
     }
 
@@ -39,16 +39,16 @@ class AuthController extends Controller
             return response(
                 [
                     "message" => "either email or password invalid"
-                ]
+                ],422
                 );
         }
         /** @var User $user */
         $user = Auth::user();
-        $token =  $user->createToken("user")->planeTextToken;
+        $token =  $user->createToken("user");
         return response(
             [
                 "user" => $user,
-                "token" => $token
+                "token" => $token->plainTextToken
             ]
         );
     }
@@ -56,8 +56,7 @@ class AuthController extends Controller
 
     public function logout(Request $request) {
         /** @var User $user */
-        $user = $request->user();
-        $user->currentAccessToken()->delete();
+        $request->user()->currentAccessToken()->delete();
         return response("", 204);
     }
 

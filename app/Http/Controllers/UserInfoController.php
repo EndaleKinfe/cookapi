@@ -11,7 +11,7 @@ class UserInfoController extends Controller
     
     public function store(StoreUserInfoRequest $request)
     {
-        UserInfo::create($request->validated());
+        UserInfo::create($request->all());
         return response("created", 201);
     }
 
