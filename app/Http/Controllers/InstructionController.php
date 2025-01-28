@@ -22,7 +22,7 @@ class InstructionController extends Controller
      */
     public function store(StoreInstructionRequest $request)
     {
-        Instruction::create($request->all());
+        Instruction::insert($request->all());
         return response("created", 201);
     }
 

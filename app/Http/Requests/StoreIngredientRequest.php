@@ -22,10 +22,10 @@ class StoreIngredientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "post_id" => ["required"],
-            "ingredient" => ["required"],
-            "description" => ["required"],
-            "amount" => ["required"]
+            "*.post_id" => ["required"],
+            "*.ingredient" => ["required"],
+            "*.description" => ["required","sometimes"],
+            "*.amount" => ["required"]
         ];
     }
 

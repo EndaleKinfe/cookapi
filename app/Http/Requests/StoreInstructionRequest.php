@@ -22,8 +22,8 @@ class StoreInstructionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "instruction" => ["required"],
-            "post_id" => ["required"]
+            "*.instruction" => ["required"],
+            "*.post_id" => ["required"]
         ];
     }
 

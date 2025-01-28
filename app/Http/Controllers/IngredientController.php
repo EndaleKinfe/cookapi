@@ -19,7 +19,7 @@ class IngredientController extends Controller
      */
     public function store(StoreIngredientRequest $request)
     {
-        Ingredient::create($request->all());
+        Ingredient::insert($request->all());
         return response("created", 201);
     }
 
